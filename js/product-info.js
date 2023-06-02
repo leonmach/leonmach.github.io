@@ -5,12 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {  // Escucha de cuand
         if (resultado.status === "ok") {
             showProductsInfo(resultado.data); // mi sentencia
             showProductsImages(resultado.data);
+            productosRelacionados(resultado.data);
           }else{
             alert("No me trae datos JSON") // si no está "ok", aparece un alert avisandome
         }
     })
 })
-
+ 
 
 // FUNCIÓN QUE MUESTRA INFORMACIÓN DEL PRODUCTO
 
@@ -80,18 +81,18 @@ document.addEventListener("DOMContentLoaded", function () {  // Escucha de cuand
 
 
 function showCommentsInfo(comentarios) { // Definimos funcion
-  let templateAuto = "";
+  let template = "";
   for (let i = 0; i < comentarios.length; i++) { // Nuevamente utilizamos for para recorrer la lista
     let comentario = comentarios[i];
     
-  templateAuto+=`
+  template+=`
   <br>
   <ul class="list-group">
     <li class="list-group-item"><strong>${comentario.user}</strong> - ${comentario.dateTime} - ${estrellas(comentario.score)}
     <br>${comentario.description}</li>
   </ul>
   `
-  document.getElementById("contenedorComentarios").innerHTML = templateAuto; // insertamos en "contenedorComentarios"
+  document.getElementById("contenedorComentarios").innerHTML = template; // insertamos en "contenedorComentarios"
   // en la linea 90 utilizamos la función "estrellas" que pone la cantidad de estrellas en función al "score"
 }}
 
@@ -111,4 +112,35 @@ function estrellas(score) { // definimos nueva funcion
     }
   }
   return estrellas;
+}
+
+
+// PRODUCTOS RELACIONADOS
+
+function productoRelacionadoID(id) { // definimos funcion para que se setee una ID y se refresque la página
+  localStorage.setItem("productoID", id);
+  window.location = "product-info.html";
+}
+
+function productosRelacionados(resultado) { // definimos funcion que va a mostrar los productos relacionados
+let template = "";
+
+for (let i = 0; i < resultado.relatedProducts.length; i++) {
+  let productoRelacionado = resultado.relatedProducts[i];
+
+ template += 
+`
+    
+      <div class="col-6 col-md-3" onclick="productoRelacionadoID(${productoRelacionado.id})" >
+        <div class="card">
+          <img src="${productoRelacionado.image}" class="card-img-top" alt="Hola">
+          <div class="card-body">
+            <p class="card-text">${productoRelacionado.name}</p>
+          </div>
+        </div>
+      </div>
+    `
+document.getElementById("productosRelacionados").innerHTML = template;
+
+}
 }
