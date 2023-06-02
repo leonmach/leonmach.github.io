@@ -233,3 +233,11 @@ a.custom-card:hover {
 .tamaño-tupuntuacion {
   width: 100px;
 }
+
+.hide{
+  display: none;
+}
+
+.colorTipoDePago {
+  color: red;
+}

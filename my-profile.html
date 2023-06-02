@@ -45,17 +45,62 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="my-profile.html" id="nombreUsuario"></a> <!-- Modifiqué la ID para que se muestre el usuario y al hacer click me lleve a "my-profile.html" -->
+            <a class="nav-link" href="my-profile.html" id="nombreUsuario"></a>
+            <!-- Modifiqué la ID para que se muestre el usuario y al hacer click me lleve a "my-profile.html" -->
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="container p-4">
+      <br>
+      <h1>Perfil</h1>
+      <hr>
+      <div class="row justify-content-md mx-5">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="firstName" class="form-label">Primer nombre*</label>
+            <input type="text" class="form-control" id="primerNombre"/>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="secondName" class="form-label">Segundo nombre</label>
+            <input type="" class="form-control" id="segundoNombre"/>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="firstSurname" class="form-label">Primer apellido*</label>
+            <input type="text" class="form-control" id="primerApellido"/>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="secondSurname" class="form-label">Segundo apellido</label>
+            <input type="text" class="form-control" id="segundoApellido"/>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="email" class="form-label">E-mail*</label>
+            <input type="text" class="form-control" id="email"/>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="contactNumber" class="form-label">Telefono de contacto</label>
+            <input type="number" max="999999999" class="form-control mb-5" id="telefonoContacto"/>
+          </div>
+        </div>
+        <hr />
+        <div>
+          <button type="button" class="btn btn-primary" onclick="guardar()" id="guardarCambios">Guardar cambios</button>
+        </div>
       </div>
+    </div>
     </div>
   </main>
   <footer class="text-muted">

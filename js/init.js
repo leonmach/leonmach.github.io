@@ -6,6 +6,15 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/prod
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
+let nombreUsuario = localStorage.getItem("nombreUsuario");
+
+validarUsuario()
+
+function validarUsuario () {
+  if (!nombreUsuario) {
+    location.href = "index.html";
+  }
+}
 
 let showSpinner = function(){ 
   document.getElementById("spinner-wrapper").style.display = "block";
@@ -40,14 +49,39 @@ let getJSONData = function(url){
     });
 }
 
+// DESLOGUEARSE
+
+function cerrarSesion() {
+  localStorage.removeItem("nombreUsuario");
+  localStorage.removeItem("datosUsuario")
+}
+
+
 // MOSTRAR USUARIO 
+
+
 
 function mostrarUsuario() { // creo funcion para mostrar el usuario
   localStorage.getItem("nombreUsuario"); // obtengo la información del usuario con "getItem" del localStorage
   nombreUsuario_json = localStorage.getItem("nombreUsuario"); // obtengo la información de la key "nombreUsuario" y me lo devuelve en JSON
   nombreUsuario = JSON.parse(nombreUsuario_json); // la información que me devuelve al estar en JSON preciso transformarlo a un string, por eso uso ".parse()"
+  menu = `
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    ${nombreUsuario}
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+    <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+    <li><a class="dropdown-item" href="index.html" onclick="cerrarSesion()">Cerrar sesión</a></li>
+  </ul>
+</div>
+  `
 
-  document.getElementById("nombreUsuario").innerHTML = nombreUsuario // ya con el valor(email en string), lo muestro en pantalla con DOM (obteniendo la ID de donde lo quiero mostrar)
+  document.getElementById("nombreUsuario").innerHTML = menu;
 }
+
+// Usamos bootstrap para hacer un menu "dropdown"
+
 
 mostrarUsuario() // llamo a la funcion
